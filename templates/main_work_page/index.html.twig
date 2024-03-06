@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainWorkPageController!{% endblock %}
+
+{% block body %}
+<h1>Welcome, {{ user.username }}!</h1>
+<p>Your roles:</p>
+<ul>
+    {% for role in user.roles %}
+        <li>{{ role }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
