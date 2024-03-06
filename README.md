@@ -20,7 +20,6 @@ Before you start, ensure you have the following installed on your machine:
 
 3. Starting the PHP Built-in Web Server
 To run the Symfony website locally, you can use the PHP built-in web server.
-
 Navigate to the root directory of your Symfony project in the terminal, and run the following command:
     ```bash
     php -S localhost:8000 -t public
