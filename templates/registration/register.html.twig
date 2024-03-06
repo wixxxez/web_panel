@@ -1,19 +1,56 @@
-{% extends 'base.html.twig' %}
+ 
+<head>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
-{% block title %}Register{% endblock %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-Q85NdaAqQOnI3zHV5ybsJpcFzQjLnZwJFq9CyqLyuR5kEE6D4NgLQy9yuhXLNLrZCgwoPVsIyFvaq5gtFzOA8A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<link rel='stylesheet' href="{{ asset('assets/css/style.css') }}" >
+
+<link rel='stylesheet' href="{{ asset('assets/css/login.css') }}" >
+{% block title %}<span id = "intro"> _// Register </span> {% endblock %}
+</head>
 {% block body %}
-    <h1>Register</h1>
+    <div class="container mx-auto max-w-sm p-4">
+    <h1 class="text-3xl font-bold mb-4">Register</h1>
 
     {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
+    {{ form_start(registrationForm, {'class': 'space-y-4'}) }}
+
+    <div class="flex flex-col mb-4">
+         
+        {{ form_row(registrationForm.username, {
+        'attr': {
+            'class': 'px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-full'
+        }
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-        {{ form_row(registrationForm.roles)}}
-        <button type="submit" class="btn">Register</button>
+    </div>
+
+    <div class="flex flex-col mb-4">
+         
+        {{ form_row(registrationForm.plainPassword, {
+        'label': 'Password',
+        'attr': {
+            'class': 'px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-full'
+        }
+        }) }}
+    </div>
+
+    
+    <div class="mb-4">
+     
+    {{ form_row(registrationForm.roles, {
+      'attr': {
+        'class': 'w-full'  
+      }
+    }) }}
+  </div>
+    <div class="flex justify-end">
+        <button type="submit" class="btn-glitch-fill">
+        Create an user account
+        </button>
+    </div>
+
     {{ form_end(registrationForm) }}
+  </div>
 {% endblock %}

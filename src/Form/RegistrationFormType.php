@@ -20,14 +20,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
+             
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -53,7 +46,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'multiple' => true, // Allow multiple role selection
                 'expanded' => true, // Display choices as checkboxes
-                'label' => 'Is admin ?',
+                'label' => 'Select the role for user..',
                  
                  
             ]);

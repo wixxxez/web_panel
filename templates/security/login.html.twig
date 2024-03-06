@@ -1,37 +1,67 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
 
+<head>
+{% block title %}_// Log in!{% endblock %}
+<link  href="{{ asset('assets/css/login.css')}}" rel="stylesheet" >
+<link  href="{{ asset('assets/css/style.css')}}" rel="stylesheet" >
+
+</head>
 {% block body %}
-<form method="post">
+<form class="form" method = "post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+  <div class="control">
+    <h1>Sign In</h1>
+  </div>
+  
+  <div class="control block-cube block-input">
+    <input type="text" value="{{ last_username }}" placeholder="username" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+    <div class="bg-top">
+      <div class="bg-inner"></div>
+    </div>
+    <div class="bg-right">
+      <div class="bg-inner"></div>
+    </div>
+    <div class="bg">
+      <div class="bg-inner"></div>
+    </div>
+  </div>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
+  <div class="control block-cube block-input">
+   <input type="password" placeholder ="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+<div class="bg-top">
+      <div class="bg-inner"></div>
+    </div>
+    <div class="bg-right">
+      <div class="bg-inner"></div>
+    </div>
+    <div class="bg">
+      <div class="bg-inner"></div>
+    </div>
+    
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
+    
+     
+  </div>
+  
 
-    <div class="checkbox mb-3">
-        <label>
+     
+  <button   class="btn-glitch-fill" type="submit">
+    
+    <span class="text">// Login</span><span class="text-decoration">_</span><span class="decoration">&rArr;</span>
+  </button>
+   <div class="checkbox mb-3">
+        
             <input type="checkbox" name="_remember_me"> Remember me
-        </label>
+       
+     
     </div>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
 </form>
+
+ 
 {% endblock %}
