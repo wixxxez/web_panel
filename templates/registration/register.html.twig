@@ -7,33 +7,51 @@
 <link rel='stylesheet' href="{{ asset('assets/css/style.css') }}" >
 
 <link rel='stylesheet' href="{{ asset('assets/css/login.css') }}" >
-{% block title %}<span id = "intro"> _// Register </span> {% endblock %}
+{% block title %}<span id = "intro"> _// Initialize process: Create_New_USER</span> <br>
+ 
+{% endblock %}
+<span id = "intro"> _// Status: Await for new user credentials.. </span>
 </head>
 {% block body %}
-    <div class="container mx-auto max-w-sm p-4">
-    <h1 class="text-3xl font-bold mb-4">Register</h1>
+    <div class="container mx-auto ">
+    
 
     {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm, {'class': 'space-y-4'}) }}
-
-    <div class="flex flex-col mb-4">
+    {{ form_start(registrationForm, {'attr': {'class': 'form'} }) }}
+    <div class="control">
+            <h1>Create new user</h1>
+        </div>
+    <div class="control block-cube block-input">
          
-        {{ form_row(registrationForm.username, {
-        'attr': {
-            'class': 'px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-full'
-        }
-        }) }}
+         {{ form_widget(registrationForm.username , {'attr': {
+            'placeholder' : 'username'
+         }} ) }}
+       <div class="bg-top">
+            <div class="bg-inner"></div>
+            </div>
+            <div class="bg-right">
+            <div class="bg-inner"></div>
+            </div>
+            <div class="bg">
+            <div class="bg-inner"></div>
+        </div>
     </div>
 
-    <div class="flex flex-col mb-4">
+    <div class="control block-cube block-input">
          
-        {{ form_row(registrationForm.plainPassword, {
-        'label': 'Password',
-        'attr': {
-            'class': 'px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-full'
-        }
-        }) }}
+          {{ form_widget(registrationForm.plainPassword , {'attr': {
+            'placeholder' : 'username'
+         }} ) }}
+       <div class="bg-top">
+        <div class="bg-inner"></div>
+        </div>
+        <div class="bg-right">
+        <div class="bg-inner"></div>
+        </div>
+        <div class="bg">
+        <div class="bg-inner"></div>
+        </div>
     </div>
 
     

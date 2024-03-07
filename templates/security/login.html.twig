@@ -1,12 +1,15 @@
 
 
 <head>
-{% block title %}_// Log in!{% endblock %}
+{% block title %} {% endblock %}
 <link  href="{{ asset('assets/css/login.css')}}" rel="stylesheet" >
 <link  href="{{ asset('assets/css/style.css')}}" rel="stylesheet" >
-
+ 
 </head>
+
 {% block body %}
+<span id = "intro"> _ // Connecting to service... Fault. </span><br>
+<span id = "intro"> _ // System detected unauthenticated user... </span>
 <form class="form" method = "post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
