@@ -39,14 +39,16 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('roles', ChoiceType::class, [
+                'label' => 'Select the role for user..',
                 'choices' => [
                      
                     'Admin' => 'ROLE_ADMIN',
+                    'Manager' => 'ROLE_MANAGER',
                     // Add other roles here
                 ],
                 'multiple' => true, // Allow multiple role selection
                 'expanded' => true, // Display choices as checkboxes
-                'label' => 'Select the role for user..',
+                 
                  
                  
             ]);
