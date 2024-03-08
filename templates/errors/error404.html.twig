@@ -1,0 +1,23 @@
+{% set previousUrl = app.request.headers.get('referer') %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error 404</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/error404.css') }}">
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="overlay"></div>
+    <div class="terminal">
+        <h1>Error <span class="errorcode">404</span></h1>
+        <p class="output">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+        {% if previousUrl %}
+            <p class="output">Please try to <a href="{{ previousUrl }}">go back</a> or <a href="{{ path('app_homepage') }}">return to the homepage</a>.</p>
+        {% else %}
+            <p class="output">Please <a href="{{ path('app_homepage') }}">return to the homepage</a>.</p>
+        {% endif %}
+        <p class="output">Good luck.</p>
+    </div>
+</body>
+</html>
