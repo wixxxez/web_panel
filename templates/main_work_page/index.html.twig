@@ -39,17 +39,22 @@
                         <div class="bg-white p-6">
                             <div id="" class="" x-show="openTab === 1">
                                {{ news.admin.Text }}
+                             
+                            {% if 'ROLE_ADMIN' in app.user.roles  %}
                             <a href=" {{ path('app_create_news', {'type': 'Admin Message'}) }} ">
                             <button class="w-1/2 bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
                                 <i class="fas fa-pen mr-3"></i> Edit
-                            </button> </a>
+                            </button> </a> 
+                            {% endif %}
                             </div>
                             <div id="" class="" x-show="openTab === 2">
                                  {{ news.events.Text }}
+                                 {% if 'ROLE_ADMIN' in app.user.roles  %}
                                  <a href=" {{ path('app_create_news', {'type': 'Events'}) }} ">
                                 <button class="w-1/2 bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
                                      <i class="fas fa-pen mr-3"></i> Edit 
                                 </button></a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
