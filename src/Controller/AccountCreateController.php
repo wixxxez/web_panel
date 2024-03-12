@@ -26,7 +26,7 @@ class AccountCreateController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
  
-           
+                $account->setStatus('Active');
                 $entityManager->persist($account);
                 $entityManager->flush();
 

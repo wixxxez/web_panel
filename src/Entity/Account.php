@@ -61,6 +61,9 @@ class Account
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Seats2 = null;
 
+    #[ORM\Column(length: 255, options: ["default" => 'Active'], nullable: true)]
+    private ?string $status = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -218,6 +221,18 @@ class Account
     public function setSeats2(?string $Seats2): static
     {
         $this->Seats2 = $Seats2;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

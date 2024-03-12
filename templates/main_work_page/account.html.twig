@@ -32,39 +32,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="hover:bg-grey-lighter">
-                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
-                                    <td class="py-4 px-6 border-b border-grey-light"> 
-                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
-                                        </button> </td>
-                                </tr>
-                                <tr class="hover:bg-grey-lighter">
-                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
-                                    <td class="py-4 px-6 border-b border-grey-light"> 
-                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
-                                        </button> </td>
-                                </tr>
-                                <tr class="hover:bg-grey-lighter">
-                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
-                                    <td class="py-4 px-6 border-b border-grey-light"> 
-                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
-                                        </button> </td>
-                                </tr>
-                                <tr class="hover:bg-grey-lighter">
-                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
-                                     
-                                    <td class="py-4 px-6 border-b border-grey-light"> 
-                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
-                                        </button> </td>
-                                </tr>
+                                        {% for account in accounts %}
+                                            <tr class="hover:bg-grey-lighter">
+                                                <td class="py-4 px-6 border-b border-grey-light">{{ account.login }}</td>
+                                                <td class="py-4 px-6 border-b border-grey-light">{{ account.password }}</td>
+                                                <td class="py-4 px-6 border-b border-grey-light">
+                                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                                        <a href="#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                 
                             </tbody>
                         </table>
                     </div>

@@ -45,4 +45,15 @@ class AccountRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findLastActiveAccountsLoginAndPassword(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.status = :status')
+            ->setParameter('status', 'active')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(10)
+            ->select('a.login', 'a.password')
+            ->getQuery()
+            ->getResult();
+    }
 }
