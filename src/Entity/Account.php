@@ -4,8 +4,17 @@ namespace App\Entity;
 
 use App\Repository\AccountRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
+#[UniqueEntity(
+    fields: ['login'],
+    errorPath: 'app_account_create',
+    message: 'This login is already in use.',
+)]
 class Account
 {
     #[ORM\Id]
@@ -13,7 +22,7 @@ class Account
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $login = null;
 
     #[ORM\Column(length: 1000)]

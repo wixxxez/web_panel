@@ -11,66 +11,58 @@
     
         {% block header %}
             {{ parent() }}
+            
+             {% for flash_type, messages in app.flashes %}
+                                    {% for message in messages %}
+                                    
+                                        {% if flash_type =='error' %}
+                                            <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                                    </svg>
+                                                    <span class="sr-only">Info</span>
+                                                    <div>
+                                                        <span class="font-medium">&nbsp;&nbsp;Error.&nbsp;</span> {{ message }}
+                                                    </div>
+                                                    </div>
+                                        {% else %}
+                                         <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                        </svg>
+                                        <span class="sr-only">Info</span>
+                                        <div>
+                                            <span class="font-medium">Success!</span> {{ message }}
+                                        </div>
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
         <div class="w-full overflow-x-hidden border-t flex flex-col">
-               <main class="w-full flex-grow p-6">
-
-                    <div class="w-full mt-12">
-                    <p class="text-xl pb-3 flex items-center">
-                           <i class="fas fa-list mr-3"></i> Accounts
-                    </p>
-                  
-                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                            <a href="#"><i class="fas fa-plus mr-3"></i> Create new user </a>
-                        </button>
-                    <div class="bg-white overflow-auto">
-                        <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
-                            <thead>
-                                <tr>
-                                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Login</th>
-                                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Password</th>
+          
+                <main class="w-full flex-grow p-6">
+                <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
+                
+                               
+                                <p class="text-xl pb-6 flex items-center">
+                                    <i class="fas fa-list mr-3"></i>Add new account
+                                </p>
+                        <div class="leading-loose">
+                            
+                                 {{ form_start(form, {'attr': {'class' : 'p-10 bg-white rounded shadow-xl' }}) }}
+                                  {{ form_widget(form.login) }}
+                                <div class="mt-2">
                                      
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="hover:bg-grey-lighter">
-                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
-                                    <td class="py-4 px-6 border-b border-grey-light"> 
-                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
-                                        </button> </td>
-                                </tr>
-                                <tr class="hover:bg-grey-lighter">
-                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
-                                    <td class="py-4 px-6 border-b border-grey-light"> 
-                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
-                                        </button> </td>
-                                </tr>
-                                <tr class="hover:bg-grey-lighter">
-                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
-                                    <td class="py-4 px-6 border-b border-grey-light"> 
-                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
-                                        </button> </td>
-                                </tr>
-                                <tr class="hover:bg-grey-lighter">
-                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
-                                     
-                                    <td class="py-4 px-6 border-b border-grey-light"> 
-                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
-                                        </button> </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                   {{ form_row(form.password) }}
+                                </div>
+                               <div class="mt-6">
+                                    <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Create</button>
+                                </div>
+                                   {{ form_end(form) }}
+                       
                     </div>
-
-               </main>
-    
+                </div>
+                </main>
             <footer class="w-full bg-white text-right p-4">
                 By ANCIENT STUDIO
             </footer>
