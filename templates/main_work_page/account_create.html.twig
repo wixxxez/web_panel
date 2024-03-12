@@ -1,0 +1,93 @@
+ {% extends "main_work_page/navigation_panel.html.twig" %}
+ {% block title %}Web panel{% endblock %}
+
+{% block head %} {{parent()}} {% endblock %}
+ 
+    {% block aside %}
+    <body class="bg-gray-100 font-family-karla flex">
+        {{ parent() }}
+    <div class="w-full flex flex-col h-screen overflow-y-hidden">
+    {% endblock %}
+    
+        {% block header %}
+            {{ parent() }}
+        <div class="w-full overflow-x-hidden border-t flex flex-col">
+               <main class="w-full flex-grow p-6">
+
+                    <div class="w-full mt-12">
+                    <p class="text-xl pb-3 flex items-center">
+                           <i class="fas fa-list mr-3"></i> Accounts
+                    </p>
+                  
+                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                            <a href="#"><i class="fas fa-plus mr-3"></i> Create new user </a>
+                        </button>
+                    <div class="bg-white overflow-auto">
+                        <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+                            <thead>
+                                <tr>
+                                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Login</th>
+                                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Password</th>
+                                     
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="hover:bg-grey-lighter">
+                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
+                                    <td class="py-4 px-6 border-b border-grey-light"> 
+                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
+                                        </button> </td>
+                                </tr>
+                                <tr class="hover:bg-grey-lighter">
+                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
+                                    <td class="py-4 px-6 border-b border-grey-light"> 
+                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
+                                        </button> </td>
+                                </tr>
+                                <tr class="hover:bg-grey-lighter">
+                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
+                                    <td class="py-4 px-6 border-b border-grey-light"> 
+                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
+                                        </button> </td>
+                                </tr>
+                                <tr class="hover:bg-grey-lighter">
+                                    <td class="py-4 px-6 border-b border-grey-light">Lian</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">Smith</td>
+                                     
+                                    <td class="py-4 px-6 border-b border-grey-light"> 
+                                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                    <a href = "#"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
+                                        </button> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+               </main>
+    
+            <footer class="w-full bg-white text-right p-4">
+                By ANCIENT STUDIO
+            </footer>
+        </div>
+        
+    </div>
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+     
+     
+</body>
+</html>
+        {% endblock %}
+         
+
+     
+
+ 

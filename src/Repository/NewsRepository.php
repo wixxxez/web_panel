@@ -45,4 +45,31 @@ class NewsRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function GetLastAdminMessage(): array
+    {
+        $adminMessage = $this->createQueryBuilder('n')
+            ->select('n.Text')
+            ->where('n.Type = :type')
+            ->setParameter('type', 'Admin Message')
+            ->orderBy('n.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $adminMessage;
+    }
+    public function GetLastEventMessage():array  
+    {
+        $events = $this->createQueryBuilder('n')
+            ->select('n.Text')
+            ->where('n.Type = :type')
+            ->setParameter('type', 'Events')
+            ->orderBy('n.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $events;
+    }
 }
