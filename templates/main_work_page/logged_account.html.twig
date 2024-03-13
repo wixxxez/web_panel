@@ -11,7 +11,7 @@
     
         {% block header %}
             {{ parent() }}
-            {% for flash_type, messages in app.flashes %}
+             {% for flash_type, messages in app.flashes %}
                                     {% for message in messages %}
                                     
                                         {% if flash_type =='error' %}
@@ -25,7 +25,7 @@
                                                     </div>
                                                     </div>
                                         {% else %}
-                                          <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                                         <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
                                         <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                         </svg>
@@ -42,36 +42,70 @@
 
                     <div class="w-full mt-12">
                     <p class="text-xl pb-3 flex items-center">
-                           <i class="fas fa-list mr-3"></i> Accounts
+                           <i class="fas fa-list mr-3"></i> Fill data 
                     </p>
-                  
-                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                            <a href="{{ path('app_account_create') }}"><i class="fas fa-plus mr-3"></i> Add account </a>
-                        </button>
+                   
                     <div class="bg-white overflow-auto">
-                        <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
-                            <thead>
-                                <tr>
-                                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Login</th>
-                                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Password</th>
+                          {{ form_start(form, {'attr': {'class' : 'p-10 bg-white rounded shadow-xl' }}) }}
+                            <p class="text-lg text-gray-800 font-medium pb-4">Information for account: {{ account.login }}</p>
+                                <div class="mt-2">
                                      
-                                </tr>
-                            </thead>
-                            <tbody>
-                                        {% for account in accounts %}
-                                            <tr class="hover:bg-grey-lighter">
-                                                <td class="py-4 px-6 border-b border-grey-light">{{ account.login }}</td>
-                                                <td class="py-4 px-6 border-b border-grey-light">{{ account.password }}</td>
-                                                <td class="py-4 px-6 border-b border-grey-light">
-                                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                                        <a href="{{ path('app_logged_account',{'id': account.id }) }}"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
+                                   {{ form_row(form.cookies) }}
+                                </div>
+                                <div class="mt-2">
+                                     
+                                   {{ form_row(form.event) }}
+                                </div>
+                                <div class="mt-2">
+                                     
+                                   {{ form_row(form.date) }}
+                                </div>
+                              <div class="mt-2">
+                                     
+                                   {{ form_row(form.barcode1) }}
+                                </div>
+                                 <div class="mt-2">
+                                     
+                                   {{ form_row(form.barcode2) }}
+                                </div>
+                                <div class="mt-2">
+                                     
+                                   {{ form_row(form.price) }}
+                                </div>
+                                 <div class="mt-2">
+                                     
+                                   {{ form_row(form.seats) }}
+                                </div>
+                                 <div class="mt-2">
+                                     
+                                   {{ form_row(form.barcode3) }}
+                                </div>
+                                <div class="mt-2">
+                                     
+                                   {{ form_row(form.barcode4) }}
+                                </div>
+                                 <div class="mt-2">
+                                     
+                                   {{ form_row(form.price2) }}
+                                </div>
+                                <div class="mt-2">
+                                     
+                                   {{ form_row(form.seats2) }}
+                                </div>
                                  
-                            </tbody>
-                        </table>
+                                 <div style = 'display:flex; justify-content: space-between;'>
+                                 <div class="mt-6">
+                                    <a href="{{ path('app_logged_account_cancel', {'id':account.id}) }}">
+                                    <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="button"> Cancel </button>
+                                    </a>
+                                </div> 
+                                <div class="mt-6">
+                                    <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit"> SAVE </button>
+                                </div>
+                                 
+                                </div>
+                                {{ form_end(form) }}
+                        </form>
                     </div>
 
                </main>

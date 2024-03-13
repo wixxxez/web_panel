@@ -36,24 +36,53 @@ class AccountRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Account
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+       public function findOneById($value): ?Account
+       {
+           return $this->createQueryBuilder('a')
+               ->andWhere('a.id = :val')
+               ->setParameter('val', $value)
+               ->getQuery()
+               ->getOneOrNullResult()
+           ;
+       }
+
+       public function findOneByWorkerId($value): ?Account
+       {
+           return $this->createQueryBuilder('a')
+               ->andWhere('a.worker_id = :val')
+               ->setParameter('val', $value)
+               ->andWhere('a.status = :status')
+                ->setParameter('status', 'Processing')
+               ->getQuery()
+               ->getOneOrNullResult()
+           ;
+       }
+
     public function findLastActiveAccountsLoginAndPassword(): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.status = :status')
-            ->setParameter('status', 'active')
+            ->setParameter('status', 'Active')
             ->orderBy('a.id', 'DESC')
             ->setMaxResults(10)
-            ->select('a.login', 'a.password')
+            ->select('a.login', 'a.password','a.id')
             ->getQuery()
             ->getResult();
+    }
+
+    public function assignWorkerId(Account $account, int $workerId): void
+    {
+        $account->setWorkerId($workerId);
+        $account->setStatus('Processing');
+        $this->getEntityManager()->persist($account);
+        $this->getEntityManager()->flush();
+    }
+
+    public function deactivateAccount(Account $account, string $status){
+
+        $account->setStatus($status);
+        $this->getEntityManager()->persist($account);
+        $this->getEntityManager()->flush();
+
     }
 }
