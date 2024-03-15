@@ -1,0 +1,85 @@
+ {% extends "main_work_page/navigation_panel.html.twig" %}
+ {% block title %}Web panel{% endblock %}
+
+{% block head %} {{parent()}} {% endblock %}
+ 
+    {% block aside %}
+    <body class="bg-gray-100 font-family-karla flex">
+        {{ parent() }}
+    <div class="w-full flex flex-col h-screen overflow-y-hidden">
+    {% endblock %}
+    
+        {% block header %}
+            {{ parent() }}
+            
+             {% for flash_type, messages in app.flashes %}
+                                    {% for message in messages %}
+                                    
+                                        {% if flash_type =='error' %}
+                                            <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                                    </svg>
+                                                    <span class="sr-only">Info</span>
+                                                    <div>
+                                                        <span class="font-medium">&nbsp;&nbsp;Error.&nbsp;</span> {{ message }}
+                                                    </div>
+                                                    </div>
+                                        {% else %}
+                                         <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                        </svg>
+                                        <span class="sr-only">Info</span>
+                                        <div>
+                                            <span class="font-medium">Success!</span> {{ message }}
+                                        </div>
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+        <div class="w-full overflow-x-hidden border-t flex flex-col">
+          
+                <main class="w-full flex-grow p-6">
+                <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
+                
+                               
+                                <p class="text-xl pb-6 flex items-center">
+                                    <i class="fas fa-list mr-3"></i>Add new account
+                                </p>
+                        <div class="leading-loose">
+                            
+                                 {{ form_start(form, {'attr': {'class' : 'p-10 bg-white rounded shadow-xl' }}) }}
+                                  {{ form_widget(form.login) }}
+                                <div class="mt-2">
+                                     
+                                   {{ form_row(form.password) }}
+                                </div>
+                               <div class="mt-6">
+                                    <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Create</button>
+                                </div>
+                                   {{ form_end(form) }}
+                       
+                    </div>
+                </div>
+                </main>
+            <footer class="w-full bg-white text-right p-4">
+                By ANCIENT STUDIO
+            </footer>
+        </div>
+        
+    </div>
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+     
+     
+</body>
+</html>
+        {% endblock %}
+         
+
+     
+
+ 

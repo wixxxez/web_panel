@@ -1,0 +1,74 @@
+ 
+<head>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-Q85NdaAqQOnI3zHV5ybsJpcFzQjLnZwJFq9CyqLyuR5kEE6D4NgLQy9yuhXLNLrZCgwoPVsIyFvaq5gtFzOA8A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel='stylesheet' href="{{ asset('assets/css/style.css') }}" >
+
+<link rel='stylesheet' href="{{ asset('assets/css/login.css') }}" >
+{% block title %}<span id = "intro"> _// Initialize process: Create_New_USER</span> <br>
+ 
+{% endblock %}
+<span id = "intro"> _// Status: Await for new user credentials.. </span>
+</head>
+{% block body %}
+    <div class="container mx-auto ">
+    
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm, {'attr': {'class': 'form'} }) }}
+    <div class="control">
+            <h1>Create new user</h1>
+        </div>
+    <div class="control block-cube block-input">
+         
+         {{ form_widget(registrationForm.username , {'attr': {
+            'placeholder' : 'username'
+         }} ) }}
+       <div class="bg-top">
+            <div class="bg-inner"></div>
+            </div>
+            <div class="bg-right">
+            <div class="bg-inner"></div>
+            </div>
+            <div class="bg">
+            <div class="bg-inner"></div>
+        </div>
+    </div>
+
+    <div class="control block-cube block-input">
+         
+          {{ form_widget(registrationForm.plainPassword , {'attr': {
+            'placeholder' : 'username'
+         }} ) }}
+       <div class="bg-top">
+        <div class="bg-inner"></div>
+        </div>
+        <div class="bg-right">
+        <div class="bg-inner"></div>
+        </div>
+        <div class="bg">
+        <div class="bg-inner"></div>
+        </div>
+    </div>
+
+    
+    <div class="mb-4">
+     
+    {{ form_row(registrationForm.roles, {
+      'attr': {
+        'class': 'w-full'  
+      }
+    }) }}
+  </div>
+    <div class="flex justify-end">
+        <button type="submit" class="btn-glitch-fill">
+        Create an user account
+        </button>
+    </div>
+
+    {{ form_end(registrationForm) }}
+  </div>
+{% endblock %}
