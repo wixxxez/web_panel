@@ -48,17 +48,22 @@
                     <div class="bg-white overflow-auto">
                           {{ form_start(form, {'attr': {'class' : 'p-10 bg-white rounded shadow-xl' }}) }}
                             <p class="text-lg text-gray-800 font-medium pb-4">Information for account: {{ account.login }}</p>
-                                <div class="mt-2">
-                                     
-                                   {{ form_row(form.cookies) }}
-                                </div>
+                                
                                 <div class="mt-2">
                                      
                                    {{ form_row(form.event) }}
                                 </div>
+                                 <div class="mt-2">
+                                     
+                                   {{ form_row(form.seats) }}
+                                </div>
                                 <div class="mt-2">
                                      
                                    {{ form_row(form.date) }}
+                                </div>
+                                <div class="mt-2">
+                                     
+                                   {{ form_row(form.price) }}
                                 </div>
                               <div class="mt-2">
                                      
@@ -68,13 +73,13 @@
                                      
                                    {{ form_row(form.barcode2) }}
                                 </div>
-                                <div class="mt-2">
-                                     
-                                   {{ form_row(form.price) }}
-                                </div>
                                  <div class="mt-2">
                                      
-                                   {{ form_row(form.seats) }}
+                                   {{ form_row(form.seats2) }}
+                                </div>
+                                  <div class="mt-2">
+                                     
+                                   {{ form_row(form.price2) }}
                                 </div>
                                  <div class="mt-2">
                                      
@@ -84,19 +89,18 @@
                                      
                                    {{ form_row(form.barcode4) }}
                                 </div>
-                                 <div class="mt-2">
-                                     
-                                   {{ form_row(form.price2) }}
-                                </div>
-                                <div class="mt-2">
-                                     
-                                   {{ form_row(form.seats2) }}
-                                </div>
+                                 
+                                 
                                  
                                  <div style = 'display:flex; justify-content: space-between;'>
                                  <div class="mt-6">
                                     <a href="{{ path('app_logged_account_cancel', {'id':account.id}) }}">
                                     <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="button"> Cancel </button>
+                                    </a>
+                                </div> 
+                                  <div class="mt-6">
+                                    <a href="{{ path('app_delete_account', {'id':account.id}) }}">
+                                    <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="button"> Delete </button>
                                     </a>
                                 </div> 
                                 <div class="mt-6">

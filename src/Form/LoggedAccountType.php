@@ -15,17 +15,7 @@ class LoggedAccountType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('cookies', TextType::class, [
-                'required' => true,
-                'label' => 'Cookies',
-                'attr' => [
-                    'class' => 'w-full px-5 py-2 text-gray-700 bg-gray-200 rounded',
-                    'placeholder' => 'cookies',
-                ],
-                'label_attr' => [
-                    'class' => 'block text-sm text-gray-600',
-                ],
-            ])
+            
             ->add('event', TextType::class, [
                 'required' => true,
                 'label' => 'Event',

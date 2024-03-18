@@ -57,17 +57,41 @@ class AccountRepository extends ServiceEntityRepository
                ->getOneOrNullResult()
            ;
        }
+    
 
+    public function filterByState(string $state): array
+       {
+           return $this->createQueryBuilder('a')
+               ->andWhere('a.status = :status')
+               ->setParameter('status', 'Active')
+               ->andWhere('a.state = :state')
+               ->setParameter('state',$state)
+               ->orderBy('a.id', 'DESC')
+               ->setMaxResults(10)
+               ->select('a.login', 'a.password','a.id','a.state')
+               ->getQuery()
+               ->getResult();
+       }
     public function findLastActiveAccountsLoginAndPassword(): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.status = :status')
             ->setParameter('status', 'Active')
             ->orderBy('a.id', 'DESC')
-            ->setMaxResults(10)
+            ->setMaxResults(500)
             ->select('a.login', 'a.password','a.id','a.state')
             ->getQuery()
             ->getResult();
+    }
+
+    public function DeleteAccountByID(int $accountId) {
+        $entityManager = $this->getEntityManager();
+        $account = $this->find($accountId);
+
+        if ($account) {
+            $entityManager->remove($account);
+            $entityManager->flush();
+        }
     }
 
     public function assignWorkerId(Account $account, int $workerId): void
