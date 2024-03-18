@@ -36,6 +36,17 @@ class AccountLogPassType extends AbstractType
                 'label_attr' => [
                     'class' => 'block text-sm text-gray-600',
                 ],
+            ])
+            ->add('state', TextType::class, [
+                'required' => true,
+                'label' => 'State',
+                'attr' => [
+                    'class' => 'w-full px-5 py-2 text-gray-700 bg-gray-200 rounded',
+                    'placeholder' => 'state',
+                ],
+                'label_attr' => [
+                    'class' => 'block text-sm text-gray-600',
+                ],
             ]);
     }
 

@@ -67,6 +67,9 @@ class Account
     #[ORM\Column(nullable: true)]
     private ?int $worker_id = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $state = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -248,6 +251,18 @@ class Account
     public function setWorkerId(?int $worker_id): static
     {
         $this->worker_id = $worker_id;
+
+        return $this;
+    }
+
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    public function setState(string $State): static
+    {
+        $this->State = $state;
 
         return $this;
     }

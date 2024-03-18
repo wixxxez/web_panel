@@ -54,7 +54,7 @@
                                 <tr>
                                     <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Login</th>
                                     <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Password</th>
-                                     
+                                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">State</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,6 +62,7 @@
                                             <tr class="hover:bg-grey-lighter">
                                                 <td class="py-4 px-6 border-b border-grey-light">{{ account.login }}</td>
                                                 <td class="py-4 px-6 border-b border-grey-light">{{ account.password }}</td>
+                                                <td class="py-4 px-6 border-b border-grey-light">{{ account.state }}</td>
                                                 <td class="py-4 px-6 border-b border-grey-light">
                                                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                                         <a href="{{ path('app_logged_account',{'id': account.id }) }}"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>

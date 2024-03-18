@@ -51,10 +51,17 @@
                             
                                  {{ form_start(form, {'attr': {'class' : 'p-10 bg-white rounded shadow-xl' }}) }}
                                   {{ form_widget(form.login) }}
+                                    
                                 <div class="mt-2">
                                      
                                    {{ form_row(form.password) }}
                                 </div>
+
+                                <div class="mt-2">
+                                     
+                                   {{ form_row(form.state) }}
+                                </div>
+
                                <div class="mt-6">
                                     <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Create</button>
                                 </div>

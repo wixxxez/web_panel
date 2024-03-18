@@ -65,7 +65,7 @@ class AccountRepository extends ServiceEntityRepository
             ->setParameter('status', 'Active')
             ->orderBy('a.id', 'DESC')
             ->setMaxResults(10)
-            ->select('a.login', 'a.password','a.id')
+            ->select('a.login', 'a.password','a.id','a.state')
             ->getQuery()
             ->getResult();
     }
