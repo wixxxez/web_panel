@@ -22,23 +22,38 @@ class LoggedAccountController extends AbstractController
 
         $account = $account_repo->findOneById($id);
         $user_id = $this->getUser()->getId();
-
+        
         $form =  $this->createForm(LoggedAccountType::class, $account);
         $security_service = new AppWorkerAccountConnector($user_id, $account_repo);
-        
-        if ($security_service->isUserHaveAccount())   
-        {
-            $account = $account_repo->findOneByWorkerId($user_id);
-            $account_id = $account->getId();
-            if ($account_id != $id) {
-                $this->addFlash('success', 'U are already using one account!');
-                return $this->redirectToRoute('app_logged_account', ['id'=>$account_id]);
-            } 
-        }   
-        else {
-            $account_repo->assignWorkerId($account, $user_id);
-        }
+        $status = $account->getStatus();
 
+        switch ($status) {
+            case "Active" :
+                if ($security_service->isUserHaveAccount())   
+                {
+                    $account = $account_repo->findOneByWorkerId($user_id);
+                    $account_id = $account->getId();
+                    if ($account_id != $id) {
+                        $this->addFlash('success', 'U are already using one account!');
+                        return $this->redirectToRoute('app_logged_account', ['id'=>$account_id]);
+                    } 
+                }   
+                else {
+                    $account_repo->assignWorkerId($account, $user_id);
+                }
+                break;
+            
+            case in_array($status, ['Processing',"Closed"]):
+                if ($security_service->checkAccess($id) == False)
+                {
+                    $this->addFlash('error', 'Ooops. you dont have access to see this account.');
+                    
+                    return $this->redirectToRoute('app_account');
+                }
+                break;
+                    
+        }
+         
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             

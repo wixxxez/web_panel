@@ -44,7 +44,17 @@
                     <p class="text-xl pb-3 flex items-center">
                            <i class="fas fa-list mr-3"></i> Fill data 
                     </p>
-                   
+                    <div class="flex items-center bg-gray-200 p-4 rounded-md shadow-md">
+    <!-- Page URL -->
+                    <div class="flex-1 mr-4">
+                        <span class="font-semibold">Page URL:</span>
+                        <span id="page-url" class="block mt-1 text-blue-600 break-all">{{ app.request.uri }}</span>
+                    </div>
+                    <!-- Copy Button -->
+                    <button id="copy-button" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Copy
+                    </button>
+                </div>
                     <div class="bg-white overflow-auto">
                           {{ form_start(form, {'attr': {'class' : 'p-10 bg-white rounded shadow-xl' }}) }}
                             <p class="text-lg text-gray-800 font-medium pb-4">Information for account: {{ account.login }}</p>
@@ -125,7 +135,7 @@
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
      
-     
+    <script src= "{{ asset('assets/js/account.js') }}"></script>
 </body>
 </html>
         {% endblock %}

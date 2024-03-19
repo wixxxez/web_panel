@@ -25,4 +25,13 @@ class AppWorkerAccountConnector {
         }
         return False; 
     }
+
+    public function checkAccess($id): bool {
+
+        
+        $account = $this->account_repo->findOneById($id);
+
+        
+        return $account->getWorkerId() == $this->user_id;
+    }
 }
