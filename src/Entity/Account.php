@@ -70,6 +70,21 @@ class Account
     #[ORM\Column(length: 255)]
     private ?string $state = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $admin_event = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $admin_id = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $Sell = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $Paid = null;
+
+ 
+ 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -266,4 +281,55 @@ class Account
 
         return $this;
     }
+
+    public function getAdminEvent(): ?string
+    {
+        return $this->admin_event;
+    }
+
+    public function setAdminEvent(?string $admin_event): static
+    {
+        $this->admin_event = $admin_event;
+
+        return $this;
+    }
+
+    public function getAdminId(): ?int
+    {
+        return $this->admin_id;
+    }
+
+    public function setAdminId(?int $admin_id): static
+    {
+        $this->admin_id = $admin_id;
+
+        return $this;
+    }
+
+    public function getSell(): ?float
+    {
+        return $this->Sell;
+    }
+
+    public function setSell(?float $Sell): static
+    {
+        $this->Sell = $Sell;
+
+        return $this;
+    }
+
+    public function getPaid(): ?float
+    {
+        return $this->Paid;
+    }
+
+    public function setPaid(?float $Paid): static
+    {
+        $this->Paid = $Paid;
+
+        return $this;
+    }
+
+ 
+   
 }

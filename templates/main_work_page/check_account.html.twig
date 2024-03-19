@@ -1,0 +1,148 @@
+ {% extends "main_work_page/navigation_panel.html.twig" %}
+ {% block title %}Web panel{% endblock %}
+
+{% block head %} {{parent()}} {% endblock %}
+ 
+    {% block aside %}
+    <body class="bg-gray-100 font-family-karla flex">
+        {{ parent() }}
+    <div class="w-full flex flex-col h-screen overflow-y-hidden">
+    {% endblock %}
+    
+        {% block header %}
+            {{ parent() }}
+            {% for flash_type, messages in app.flashes %}
+                                    {% for message in messages %}
+                                    
+                                        {% if flash_type =='error' %}
+                                            <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                                    </svg>
+                                                    <span class="sr-only">Info</span>
+                                                    <div>
+                                                        <span class="font-medium">&nbsp;&nbsp;Error.&nbsp;</span> {{ message }}
+                                                    </div>
+                                                    </div>
+                                        {% else %}
+                                          <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                        </svg>
+                                        <span class="sr-only">Info</span>
+                                        <div>
+                                            <span class="font-medium">Success!</span> {{ message }}
+                                        </div>
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+        <div class="w-full overflow-x-hidden border-t flex flex-col">
+               <main class="w-full flex-grow p-6">
+          
+                    
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-dark">
+    <h2 class="text-2xl font-bold mb-4">Account: {{ account.login }}</h2>
+    <table id="2" class="table-auto w-full bg-dark">
+        <thead>
+            <tr>
+                <th class="px-4 py-2" data-priority="1">Field name</th>
+                <th class="px-4 py-2" data-priority="2">Data</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+              <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">Account Id: </td>
+                <td class="border px-4 py-2">{{ account.id }}</td>
+            </tr>
+            <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">Worker Id: </td>
+                 <td class="border px-4 py-2">{{ account.workerID }}</td>
+            </tr>                          
+                                               
+              <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">Event: </td>
+                <td class="border px-4 py-2"> {{ account.event }} </td>
+            </tr>                                    
+              <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">Seats: </td>
+                <td class="border px-4 py-2"> {{ account.seats }} </td>
+            </tr>                                             
+                                             
+              <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">Price: </td>
+                 <td class="border px-4 py-2"> {{ account.price }} </td>
+            </tr>     
+            <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">Date: </td>
+                <td class="border px-4 py-2"> {{ account.date }} </td>
+            </tr>                                    
+                                              
+             <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">barcode1: </td>
+                <td class="border px-4 py-2"> {{ account.barcode1 }} </td>
+            </tr>  
+            <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">barcode2: </td>
+                <td class="border px-4 py-2"> {{ account.barcode2 }} </td>
+            </tr>                                           
+             <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">Seats: </td>
+                <td class="border px-4 py-2"> {{ account.seats2 }} </td>
+            </tr>                                      
+             <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">Price: </td>
+                <td class="border px-4 py-2"> {{ account.price2 }} </td>
+            </tr>                                         
+              <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">barcode3: </td>
+                <td class="border px-4 py-2"> {{ account.barcode3 }} </td>
+            </tr>    
+             <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">barcode4: </td>
+                <td class="border px-4 py-2"> {{ account.barcode4 }} </td>
+            </tr>                                    
+              <tr class="hover:bg-grey-lighter">
+               <td class="border px-4 py-2">Status: </td>
+                <td class="border px-4 py-2"> {{ account.adminEvent }} </td>
+            </tr>                                    
+                                            
+
+        </tbody>
+    </table>
+</div>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            scrollX: true
+            // Add any customization options here
+        });
+    });
+</script>
+               </main>
+    
+            <footer class="w-full bg-white text-right p-4">
+                By ANCIENT STUDIO
+            </footer>
+        </div>
+        
+    </div>
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+     
+     
+</body>
+</html>
+        {% endblock %}
+         
+
+     
+
+ 

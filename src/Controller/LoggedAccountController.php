@@ -34,7 +34,7 @@ class LoggedAccountController extends AbstractController
                     $account = $account_repo->findOneByWorkerId($user_id);
                     $account_id = $account->getId();
                     if ($account_id != $id) {
-                        $this->addFlash('success', 'U are already using one account!');
+                        $this->addFlash('success', 'You are already using one account!');
                         return $this->redirectToRoute('app_logged_account', ['id'=>$account_id]);
                     } 
                 }   

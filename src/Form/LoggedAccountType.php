@@ -17,7 +17,7 @@ class LoggedAccountType extends AbstractType
         $builder
             
             ->add('event', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Event',
                 'attr' => [
                     'class' => 'w-full px-5 py-2 text-gray-700 bg-gray-200 rounded',
@@ -39,7 +39,7 @@ class LoggedAccountType extends AbstractType
                 ],
             ])
             ->add('barcode1', TextType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => 'Barcode1',
                 'attr' => [
                     'class' => 'w-full px-5 py-2 text-gray-700 bg-gray-200 rounded',
@@ -50,7 +50,7 @@ class LoggedAccountType extends AbstractType
                 ],
             ])
             ->add('barcode2', TextType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => 'Barcode2',
                 'attr' => [
                     'class' => 'w-full px-5 py-2 text-gray-700 bg-gray-200 rounded',
@@ -72,7 +72,7 @@ class LoggedAccountType extends AbstractType
                 ],
             ])
             ->add('seats', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Seats',
                 'attr' => [
                     'class' => 'w-full px-5 py-2 text-gray-700 bg-gray-200 rounded',
@@ -105,7 +105,7 @@ class LoggedAccountType extends AbstractType
                 ],
             ])
             ->add('price2', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Price (USD)',
                 'attr' => [
                     'class' => 'w-full px-5 py-2 text-gray-700 bg-gray-200 rounded',
@@ -116,7 +116,7 @@ class LoggedAccountType extends AbstractType
                 ],
             ])
             ->add('seats2', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Seats',
                 'attr' => [
                     'class' => 'w-full px-5 py-2 text-gray-700 bg-gray-200 rounded',

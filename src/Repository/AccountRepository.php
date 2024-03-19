@@ -84,6 +84,18 @@ class AccountRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findLastClosedAccounts( ) {
+
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.status = :status')
+            ->setParameter('status', 'Closed')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(500)
+            ->select('a')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function DeleteAccountByID(int $accountId) {
         $entityManager = $this->getEntityManager();
         $account = $this->find($accountId);
@@ -105,8 +117,34 @@ class AccountRepository extends ServiceEntityRepository
     public function deactivateAccount(Account $account, string $status){
 
         $account->setStatus($status);
+        if ($status == 'Closed') {
+            $account->setAdminEvent('Await');
+        }
         $this->getEntityManager()->persist($account);
         $this->getEntityManager()->flush();
 
     }
+
+    public function findOneByAdminId($value): ?Account
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.admin_id = :val')
+            ->setParameter('val', $value)
+            ->andWhere('a.admin_event = :status')
+            ->setParameter('status', 'In progress')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function assignAdminId(Account $account, int $workerId): void
+    {
+        $account->setAdminId($workerId);
+        $account->setAdminEvent('In progress');
+        $this->getEntityManager()->persist($account);
+        $this->getEntityManager()->flush();
+    }
+
 }
+
+ 
