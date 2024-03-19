@@ -39,8 +39,12 @@
                                 {% endfor %}
         <div class="w-full overflow-x-hidden border-t flex flex-col">
                <main class="w-full flex-grow p-6">
-
-                   
+            <div class="w-1/4">
+                    {% if 'ROLE_ADMIN' in app.user.roles  %}
+            <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <a href="{{ path('app_account_create') }}"><i class="fas fa-plus mr-3"></i> Add account </a>
+            </button></div>
+            {% endif %} 
                     
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-dark">
     <h2 class="text-2xl font-bold mb-4">Available Accounts</h2>

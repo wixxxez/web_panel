@@ -262,7 +262,7 @@ class Account
 
     public function setState(string $State): static
     {
-        $this->State = $state;
+        $this->state = $State;
 
         return $this;
     }
