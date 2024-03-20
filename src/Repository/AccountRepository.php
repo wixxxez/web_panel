@@ -125,6 +125,16 @@ class AccountRepository extends ServiceEntityRepository
 
     }
 
+    public function deactivateAccountByAdmin(Account $account, string $status){
+
+        
+        $account->setAdminEvent($status);
+         
+        $this->getEntityManager()->persist($account);
+        $this->getEntityManager()->flush();
+
+    }
+
     public function findOneByAdminId($value): ?Account
     {
         return $this->createQueryBuilder('a')
