@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Account;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Driver\Connection;
 
 /**
  * @extends ServiceEntityRepository<Account>
@@ -118,6 +119,7 @@ class AccountRepository extends ServiceEntityRepository
 
         $account->setStatus($status);
         if ($status == 'Closed') {
+            $account->setCreatedAt(date('Y-m-d'));
             $account->setAdminEvent('Await');
         }
         $this->getEntityManager()->persist($account);
@@ -154,7 +156,40 @@ class AccountRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($account);
         $this->getEntityManager()->flush();
     }
+     public function getAccountDetailsByDate($connection, $date)
+    {
+        $sql = '
+            SELECT 
+                u.username AS username,
+                a.day,
+                a.worker_id,
+                a.amount_of_barcodes,
+                a.total_price
+            FROM (
+                SELECT 
+                    worker_id,
+                    created_at AS day,
+                    COALESCE(SUM(CASE WHEN barcode1 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+                    + COALESCE(SUM(CASE WHEN barcode2 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+                    + COALESCE(SUM(CASE WHEN barcode3 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+                    + COALESCE(SUM(CASE WHEN barcode4 IS NOT NULL THEN 1 ELSE 0 END), 0) AS amount_of_barcodes,
+                    SUM(CASE WHEN barcode1 IS NOT NULL OR barcode2 IS NOT NULL THEN price ELSE 0 END)
+                    + SUM(CASE WHEN barcode3 IS NOT NULL OR barcode4 IS NOT NULL THEN price2 ELSE 0 END) AS total_price
+                FROM 
+                    account
+                WHERE
+                    created_at = :date
+                GROUP BY 
+                    worker_id
+            ) AS a
+            JOIN user AS u ON u.id = a.worker_id
+        ';
 
+        $stmt = $connection->prepare($sql);
+        $stmt = $stmt->execute(['date' => $date]); 
+        $results = $stmt->fetchAllAssociative();
+
+        return $results; 
 }
 
- 
+}

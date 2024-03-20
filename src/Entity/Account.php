@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AccountRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -82,7 +83,13 @@ class Account
     #[ORM\Column(nullable: true)]
     private ?float $Paid = null;
 
- 
+    #[ORM\Column(length: 255, options: ["default" => ""] )]
+    private string $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = date('Y-m-d');
+    }
  
 
     public function getId(): ?int
@@ -330,6 +337,16 @@ class Account
         return $this;
     }
 
- 
+    public function getCreatedAt(): string
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(string $date): static
+    {
+        $this->createdAt = $date;
+
+        return $this;
+    }
    
 }
