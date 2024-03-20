@@ -109,10 +109,10 @@
         var myLineChart = new Chart(chartTwo, {
             type: 'line',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sut.', 'Sun.'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: 'Total sales',
+                    data: {{ graph | json_encode | raw }},
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',

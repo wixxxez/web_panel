@@ -6,7 +6,7 @@ use App\Entity\Account;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Driver\Connection;
-
+use DateTime; 
 /**
  * @extends ServiceEntityRepository<Account>
  *
@@ -192,4 +192,57 @@ class AccountRepository extends ServiceEntityRepository
         return $results; 
 }
 
+
+public function GetGraphData($connection){
+            // Calculate the start and end dates of the current week
+        $startDate = date('Y-m-d', strtotime('last Monday'));
+        $endDate = date('Y-m-d', strtotime('next Sunday'));
+
+        // Initialize an array to hold the results
+        $results = [];
+
+        $sql = '
+            SELECT 
+                DATE(created_at) AS day,
+                SUM(price + price2) as total_price
+            FROM 
+                account
+            WHERE 
+                created_at >= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY)
+            GROUP BY 
+                DATE(created_at)
+            ORDER BY 
+                DATE(created_at) ASC;
+        ';
+        $stmt = $connection->prepare($sql);
+        $stmt = $stmt->execute(); 
+        $queryResults = $stmt->fetchAllAssociative();
+
+        // Process the query results
+        foreach ($queryResults as $row) {
+            $results[$row['day']] = [
+                'total_price' => $row['total_price'],
+                 
+            ];
+        }
+
+        // Fill in the missing dates with zeros
+        $currentDate = new DateTime($startDate);
+        $endDateObj = new DateTime($endDate);
+        while ($currentDate <= $endDateObj) {
+            $currentDateString = $currentDate->format('Y-m-d');
+            if (!isset($results[$currentDateString])) {
+                $results[$currentDateString] = [
+                    'total_price' => 0,
+                   
+                ];
+            }
+            $currentDate->modify('+1 day');
+        }
+
+        // Sort the results by date
+        ksort($results);
+
+        return $results;
+    }
 }

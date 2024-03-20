@@ -30,14 +30,21 @@ class MainWorkPageController extends AbstractController
         $adminMessage = $news_repository->GetLastAdminMessage();
 
         $events = $news_repository->GetLastEventMessage();
-         
+        $weeklyResults = $repository->GetGraphData($conn);
+        $totalPrices = [];
+        foreach ($weeklyResults as $result) {
+            $totalPrices[] = $result['total_price'];
+        }
+
         $data =  $repository->getAccountDetailsByDate($conn, date('Y-m-d'));
         $news  = ['admin'=> $adminMessage, 'events' => $events];
+         
         return $this->render('main_work_page/index.html.twig', [
             'controller_name' => 'MainWorkPageController',
             'user' => $user,
             'news' =>  $news,
-            "user_data" => $data
+            "user_data" => $data,
+            "graph" => $totalPrices
         ]);
     }
 }
