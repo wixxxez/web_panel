@@ -80,11 +80,27 @@
                                                 <td class="border px-4 py-2"> {{ account.price2 }} </td>
                                                 <td class="border px-4 py-2"> {{ account.barcode3 }} </td>
                                                 <td class="border px-4 py-2"> {{ account.barcode4 }} </td>
+                                                {% if account.adminEvent == "Await" %}
                                                 <td class="border px-4 py-2">
                                                     <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">
                                                         <a href="{{ path('app_check_account_by_admin',{'id': account.id }) }}">  {{ account.adminEvent }} </a>
                                                     </button>
                                                 </td>
+                                                {% else %}
+                                                    {% if account.adminEvent == "Sold" %}
+                                                    <td class="border px-4 py-2">
+                                                        <button class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
+                                                            <a href="{{ path('app_check_account_by_admin',{'id': account.id }) }}">  {{ account.adminEvent }} </a>
+                                                        </button>
+                                                    </td>
+                                                    {% else %}
+                                                    <td class="border px-4 py-2">
+                                                        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
+                                                            <a href="{{ path('app_check_account_by_admin',{'id': account.id }) }}">  {{ account.adminEvent }} </a>
+                                                        </button>
+                                                    </td>
+                                                {% endif %}
+                                             {% endif %}
                                             </tr>
             {% endfor %}
              

@@ -90,7 +90,7 @@ class AccountRepository extends ServiceEntityRepository
             ->andWhere('a.status = :status')
             ->setParameter('status', 'Closed')
             ->orderBy('a.id', 'DESC')
-            ->setMaxResults(500)
+            
             ->select('a')
             ->getQuery()
             ->getResult();

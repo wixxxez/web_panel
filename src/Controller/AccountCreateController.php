@@ -25,7 +25,7 @@ class AccountCreateController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
- 
+            
                 $account->setStatus('Active');
                 $entityManager->persist($account);
                 $entityManager->flush();
@@ -36,12 +36,11 @@ class AccountCreateController extends AbstractController
                 // Redirect to the same page to avoid form resubmission
                 return $this->redirectToRoute('app_account_create');
              
+             
         }
-        else {
-            // Handle the case where the form is not valid
-            // This includes cases where validation fails due to a duplicated login
-            $this->addFlash('error', 'This login is already in use.');
-        }
+       if ($form->isSubmitted()) {
+            $this->addFlash('error', 'This login is already used.');
+       }
 
         return $this->render('main_work_page/account_create.html.twig', [
             'controller_name' => 'AccountCreateController',
