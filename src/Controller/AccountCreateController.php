@@ -44,7 +44,8 @@ class AccountCreateController extends AbstractController
 
         return $this->render('main_work_page/account_create.html.twig', [
             'controller_name' => 'AccountCreateController',
-            'form' => $form
+            'form' => $form,
+            'active_page' => "Account"
         ]);
     }
 }

@@ -44,7 +44,8 @@ class MainWorkPageController extends AbstractController
             'user' => $user,
             'news' =>  $news,
             "user_data" => $data,
-            "graph" => $totalPrices
+            "graph" => $totalPrices,
+            'active_page' => "News"
         ]);
     }
 }

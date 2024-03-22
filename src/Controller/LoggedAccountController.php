@@ -73,7 +73,8 @@ class LoggedAccountController extends AbstractController
         return $this->render('main_work_page/logged_account.html.twig', [
             'controller_name' => 'LoggedAccountController',
             'account' => $account,
-            'form' => $form
+            'form' => $form,
+            'active_page' => "Account"
         ]);
     }
 

@@ -19,6 +19,7 @@ class StatisticController extends AbstractController
         return $this->render('main_work_page/statistics.html.twig', [
             'controller_name' => 'StatisticController',
             'accounts' => $list_of_accounts,
+            'active_page' => "Stat"
         ]);
     }
 }

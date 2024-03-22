@@ -11,7 +11,7 @@
     
         {% block header %}
             {{ parent() }}
-            
+             <main class="w-full flex-grow p-6">
              {% for flash_type, messages in app.flashes %}
                                     {% for message in messages %}
                                     
@@ -40,7 +40,7 @@
                                 {% endfor %}
         <div class="w-full overflow-x-hidden border-t flex flex-col">
           
-                <main class="w-full flex-grow p-6">
+                
                 <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
                 
                                
@@ -69,12 +69,12 @@
                        
                     </div>
                 </div>
-                </main>
-            <footer class="w-full bg-white text-right p-4">
+              
+            
+        </div>  </main>
+        <footer class="w-full bg-white text-right p-4">
                 By ANCIENT STUDIO
             </footer>
-        </div>
-        
     </div>
     <!-- AlpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>

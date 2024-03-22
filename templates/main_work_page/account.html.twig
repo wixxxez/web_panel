@@ -7,10 +7,13 @@
     <body class="bg-gray-100 font-family-karla flex">
         {{ parent() }}
     <div class="w-full flex flex-col h-screen overflow-y-hidden">
+    
     {% endblock %}
     
         {% block header %}
             {{ parent() }}
+            
+            <main class="w-full flex-grow p-6">
             {% for flash_type, messages in app.flashes %}
                                     {% for message in messages %}
                                     
@@ -36,9 +39,9 @@
                                         </div>
                                         {% endif %}
                                     {% endfor %}
-                                {% endfor %}
+                                {% endfor %} 
         <div class="w-full overflow-x-hidden border-t flex flex-col">
-               <main class="w-full flex-grow p-6">
+               
             <div class="w-1/4">
                     {% if 'ROLE_ADMIN' in app.user.roles  %}
             <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
@@ -88,9 +91,9 @@
         });
     });
 </script>
-               </main>
+               
     
-            <footer class="w-full bg-white text-right p-4">
+           </main> <footer class="w-full bg-white text-right p-4">
                 By ANCIENT STUDIO
             </footer>
         </div>

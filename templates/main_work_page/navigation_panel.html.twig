@@ -38,16 +38,16 @@
             {% endif %}
         </div>
         <nav class="text-white text-base font-semibold pt-3">
-            <a href="{{ path('app_main_work_page') }}" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+            <a href="{{ path('app_main_work_page') }}" class="flex items-center {% if active_page == 'News' %}active-nav-link{% endif %} text-white py-4 pl-6 nav-item">
                 <i class="fas fa-sticky-note mr-3"></i>
-                News
+                News  
             </a>
-            <a href="{{ path('app_account') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="{{ path('app_account') }}" class="{% if active_page == 'Account' %}active-nav-link{% endif %} flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-solid fa-user mr-3"></i>
                 Account
             </a>
             {% if ('ROLE_ADMIN' in app.user.roles) or ('ROLE_MANAGER' in app.user.roles)  %}
-            <a href="{{ path('app_statistics') }}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="{{ path('app_statistics') }}" class="{% if active_page == 'Stat' %}active-nav-link{% endif %} flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-table mr-3"></i>
                 Statistics
             </a>

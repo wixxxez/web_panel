@@ -83,7 +83,8 @@ class CheckAccountByAdminController extends AbstractController
         return $this->render('main_work_page/check_account.html.twig', [
             'controller_name' => 'CheckAccountByAdminController',
             'account' => $account,
-            'form' => $form
+            'form' => $form,
+            'active_page' => "Stat"
         ]);
     }
 

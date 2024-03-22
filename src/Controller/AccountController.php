@@ -28,7 +28,8 @@ class AccountController extends AbstractController
         return $this->render('main_work_page/account.html.twig', [
             'controller_name' => 'AccountController',
             'accounts' => $list_of_accounts,
-            'form' => $form
+            'form' => $form,
+            'active_page' => "Account"
         ]);
     }
 }

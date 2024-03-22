@@ -39,6 +39,7 @@ class CreateNewsController extends AbstractController
             'news' => $news,
             'type' => $type,
             'form' => $form->createView(),
+            'active_page' => "News"
         ]);
     }
 }

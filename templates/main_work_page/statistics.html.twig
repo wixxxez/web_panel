@@ -11,6 +11,8 @@
     
         {% block header %}
             {{ parent() }}
+             <main class="w-full flex-grow p-6">
+          
             {% for flash_type, messages in app.flashes %}
                                     {% for message in messages %}
                                     
@@ -38,8 +40,7 @@
                                     {% endfor %}
                                 {% endfor %}
         <div class="w-full overflow-x-hidden border-t flex flex-col">
-               <main class="w-full flex-grow p-6">
-          
+               
                     
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-dark">
     <h2 class="text-2xl font-bold mb-4">Accounts statistics</h2>
@@ -72,8 +73,9 @@
                                                 <td class="border px-4 py-2"> {{ account.paid }} </td>
                                                 <td class="border px-4 py-2"> {{ account.event }} </td>
                                                 <td class="border px-4 py-2"> {{ account.seats }} </td>
-                                                <td class="border px-4 py-2"> {{ account.price }} </td>
+                                                
                                                 <td class="border px-4 py-2"> {{ account.date }} </td>
+                                                <td class="border px-4 py-2"> {{ account.price }} </td>
                                                 <td class="border px-4 py-2"> {{ account.barcode1 }} </td>
                                                 <td class="border px-4 py-2"> {{ account.barcode2 }} </td>
                                                 <td class="border px-4 py-2"> {{ account.seats2 }} </td>
