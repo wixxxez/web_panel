@@ -1,0 +1,352 @@
+<!-- component -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+</head>
+<body>
+    <div class="h-full bg-gray-200 p-8">
+        <div class="bg-white rounded-lg shadow-xl pb-8">
+            <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
+                <button @click="openSettings = !openSettings" class="border border-gray-400 p-2 rounded text-gray-300 hover:text-gray-300 bg-gray-100 bg-opacity-10 hover:bg-opacity-20" title="Settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                    </svg>
+                </button>
+                <div x-show="openSettings" @click.away="openSettings = false" class="bg-white absolute right-0 w-40 py-2 mt-1 border border-gray-200 shadow-2xl" style="display: none;">
+                    <div class="py-2 border-b">
+                        <p class="text-gray-400 text-xs px-6 uppercase mb-1">Settings</p>
+                       
+                        <button class="w-full flex items-center py-1.5 px-6 space-x-2 hover:bg-gray-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                            </svg>
+                            <span class="text-sm text-gray-700">Block User</span>
+                        </button>
+                        
+                    </div>
+                     
+                </div>
+            </div>
+            <div class="w-full h-[250px]">
+                <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg">
+            </div>
+            <div class="flex flex-col items-center -mt-20">
+                 
+                <img src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" class="w-40 border-4 border-white rounded-full">
+                <div class="w-40 h-40 group hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500" onclick="openModal('modelConfirm')">
+                   <a href="#" onclick="openModal('modelConfirm')"> <img class="hidden group-hover:block w-12" src="https://www.svgrepo.com/show/33565/upload.svg" alt="" /> </a>
+                </div>
+                <div class="flex items-center space-x-2 mt-2">
+                    <p class="text-2xl">Amanda Ross</p>
+                    <span class="bg-blue-500 rounded-full p-1" title="Verified">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </span>
+                </div>
+                <p class="text-gray-700">Senior Software Engineer at Tailwind CSS</p>
+                <p class="text-sm text-gray-500">New York, USA</p>
+            </div>
+            <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
+                <div class="flex items-center space-x-4 mt-2">
+                    <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
+                        </svg>
+                        <span>Connect</span>
+                    </button>
+                    <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Message</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+            <div class="w-full flex flex-col 2xl:w-1/3">
+                 
+                <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
+                    <h4 class="text-xl text-gray-900 font-bold">Activity log</h4>
+                    <div class="relative px-4">
+                        <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
+
+                        <!-- start::Timeline item -->
+                        <div class="flex items-center w-full my-6 -ml-1.5">
+                            <div class="w-1/12 z-10">
+                                <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                            </div>
+                            <div class="w-11/12">
+                                <p class="text-sm">Profile informations changed.</p>
+                                <p class="text-xs text-gray-500">3 min ago</p>
+                            </div>
+                        </div>
+                        <!-- end::Timeline item -->
+
+                        <!-- start::Timeline item -->
+                        <div class="flex items-center w-full my-6 -ml-1.5">
+                            <div class="w-1/12 z-10">
+                                <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                            </div>
+                            <div class="w-11/12">
+                                <p class="text-sm">
+                                    Connected with <a href="#" class="text-blue-600 font-bold">Colby Covington</a>.</p>
+                                <p class="text-xs text-gray-500">15 min ago</p>
+                            </div>
+                        </div>
+                        <!-- end::Timeline item -->
+
+                        <!-- start::Timeline item -->
+                        <div class="flex items-center w-full my-6 -ml-1.5">
+                            <div class="w-1/12 z-10">
+                                <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                            </div>
+                            <div class="w-11/12">
+                                <p class="text-sm">Invoice <a href="#" class="text-blue-600 font-bold">#4563</a> was created.</p>
+                                <p class="text-xs text-gray-500">57 min ago</p>
+                            </div>
+                        </div>
+                        <!-- end::Timeline item -->
+
+                        <!-- start::Timeline item -->
+                        <div class="flex items-center w-full my-6 -ml-1.5">
+                            <div class="w-1/12 z-10">
+                                <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                            </div>
+                            <div class="w-11/12">
+                                <p class="text-sm">
+                                    Message received from <a href="#" class="text-blue-600 font-bold">Cecilia Hendric</a>.</p>
+                                <p class="text-xs text-gray-500">1 hour ago</p>
+                            </div>
+                        </div>
+                        <!-- end::Timeline item -->
+
+                        <!-- start::Timeline item -->
+                        <div class="flex items-center w-full my-6 -ml-1.5">
+                            <div class="w-1/12 z-10">
+                                <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                            </div>
+                            <div class="w-11/12">
+                                <p class="text-sm">New order received <a href="#" class="text-blue-600 font-bold">#OR9653</a>.</p>
+                                <p class="text-xs text-gray-500">2 hours ago</p>
+                            </div>
+                        </div>
+                        <!-- end::Timeline item -->
+
+                        <!-- start::Timeline item -->
+                        <div class="flex items-center w-full my-6 -ml-1.5">
+                            <div class="w-1/12 z-10">
+                                <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                            </div>
+                            <div class="w-11/12">
+                                <p class="text-sm">
+                                    Message received from <a href="#" class="text-blue-600 font-bold">Jane Stillman</a>.</p>
+                                <p class="text-xs text-gray-500">2 hours ago</p>
+                            </div>
+                        </div>
+                        <!-- end::Timeline item -->
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col w-full 2xl:w-2/3">
+                 
+                <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
+                    <h4 class="text-xl text-gray-900 font-bold">Statistics</h4>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-4">
+                        <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-sm text-indigo-600">Total Revenue</span>
+                                <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">7 days</span>
+                            </div>
+                            <div class="flex items-center justify-between mt-6">
+                                <div>
+                                    <svg class="w-12 h-12 p-2.5 bg-indigo-400 bg-opacity-20 rounded-full text-indigo-600 border border-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="flex flex-col">
+                                    <div class="flex items-end">
+                                        <span class="text-2xl 2xl:text-3xl font-bold">$8,141</span>
+                                        <div class="flex items-center ml-2 mb-1">
+                                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                            <span class="font-bold text-sm text-gray-500 ml-0.5">3%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-sm text-green-600">New Orders</span>
+                                <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">7 days</span>
+                            </div>
+                            <div class="flex items-center justify-between mt-6">
+                                <div>
+                                    <svg class="w-12 h-12 p-2.5 bg-green-400 bg-opacity-20 rounded-full text-green-600 border border-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                                </div>
+                                <div class="flex flex-col">
+                                    <div class="flex items-end">
+                                        <span class="text-2xl 2xl:text-3xl font-bold">217</span>
+                                        <div class="flex items-center ml-2 mb-1">
+                                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                            <span class="font-bold text-sm text-gray-500 ml-0.5">5%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-sm text-blue-600">New Connections</span>
+                                <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">7 days</span>
+                            </div>
+                            <div class="flex items-center justify-between mt-6">
+                                <div>
+                                    <svg class="w-12 h-12 p-2.5 bg-blue-400 bg-opacity-20 rounded-full text-blue-600 border border-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                </div>
+                                <div class="flex flex-col">
+                                    <div class="flex items-end">
+                                        <span class="text-2xl 2xl:text-3xl font-bold">54</span>
+                                        <div class="flex items-center ml-2 mb-1">
+                                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                            <span class="font-bold text-sm text-gray-500 ml-0.5">7%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <canvas id="verticalBarChart" style="display: block; box-sizing: border-box; height: 414px; width: 828px;" width="1656" height="828"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+        <div id="modelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
+            <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
+        
+                <div class="flex justify-end p-2">
+                    <button onclick="closeModal('modelConfirm')" type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+        
+                <div class="p-6 pt-0 text-center">
+                    <form>
+                        <div class="flex items-center space-x-6">
+                          <div class="shrink-0">
+                            <img id='preview_img' class="h-16 w-16 object-cover rounded-full" src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" alt="Current profile photo" />
+                          </div>
+                          <label class="block">
+                            <span class="sr-only">Choose profile photo</span>
+                            <input type="file" onchange="loadFile(event)" class="block w-full text-sm text-slate-500
+                              file:mr-4 file:py-2 file:px-4
+                              file:rounded-full file:border-0
+                              file:text-sm file:font-semibold
+                              file:bg-violet-50 file:text-violet-700
+                              hover:file:bg-violet-100
+                            "/>
+                          </label>
+                         
+                        </div> <div class="mt-6">
+                            <button class="px-4 py-1 text-white font-light tracking-wider bg-blue-500 hover:bg-blue-700 rounded" type="submit">Change Image</button>
+                        </div>
+                      </form>
+                      
+                </div>
+        
+            </div>
+        </div>
+    <script>
+
+            const DATA_SET_VERTICAL_BAR_CHART_1 = [68.106, 26.762, 94.255, 72.021, 74.082, 64.923, 85.565, 32.432, 54.664, 87.654, 43.013, 91.443];
+
+            const labels_vertical_bar_chart = ['January', 'February', 'Mart', 'April', 'May', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            const dataVerticalBarChart= {
+                labels: labels_vertical_bar_chart,
+                datasets: [
+                    {
+                        label: 'Revenue',
+                        data: DATA_SET_VERTICAL_BAR_CHART_1,
+                        borderColor: 'rgb(54, 162, 235)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    }
+                ]
+            };
+            const configVerticalBarChart = {
+                type: 'bar',
+                data: dataVerticalBarChart,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Last 12 Months'
+                        }
+                    }
+                },
+            };
+
+            var verticalBarChart = new Chart(
+                document.getElementById('verticalBarChart'),
+                configVerticalBarChart
+            );
+
+
+            window.openModal = function(modalId) {
+                document.getElementById(modalId).style.display = 'block'
+                document.getElementsByTagName('body')[0].classList.add('overflow-y-hidden')
+            }
+
+            window.closeModal = function(modalId) {
+                document.getElementById(modalId).style.display = 'none'
+                document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+            }
+
+            // Close all modals when press ESC
+            document.onkeydown = function(event) {
+                event = event || window.event;
+                if (event.keyCode === 27) {
+                    document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+                    let modals = document.getElementsByClassName('modal');
+                    Array.prototype.slice.call(modals).forEach(i => {
+                        i.style.display = 'none'
+                    })
+                }
+            };
+
+            var loadFile = function(event) {
+            
+            var input = event.target;
+            var file = input.files[0];
+            var type = file.type;
+
+           var output = document.getElementById('preview_img');
+
+
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+        </script>
+</body>
+</html>
