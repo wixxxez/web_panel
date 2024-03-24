@@ -11,17 +11,21 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\AccountRepository;
 use App\Security\AccountAdminMiddleware;
 use App\Form\SellAccountType;
-
+use App\Repository\UserRepository;
 
 class CheckAccountByAdminController extends AbstractController
 {
     #[Route('/check_account_by_admin', name: 'app_check_account_by_admin')]
-    public function index(Request $request, AccountRepository $account_repo, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, AccountRepository $account_repo, EntityManagerInterface $entityManager, UserRepository $user_repo): Response
     {
         $id = $request->query->get('id');
         $account = $account_repo->findOneById($id);
 
         $user_id = $this->getUser()->getId();
+
+        $worker_id = $account->getWorkerId();
+
+        $worker_account = $user_repo->findOneByID($worker_id);
 
         $middleware = new AccountAdminMiddleware($account, $account_repo, $user_id);
 
@@ -73,7 +77,9 @@ class CheckAccountByAdminController extends AbstractController
             $account->setAdminEvent('Sold');
             $entityManager->persist($account);
             $entityManager->flush();
-
+            $worker_account->updateBalance($sell * 0.1); 
+            $entityManager->persist($worker_account);
+            $entityManager->flush();
             // Add a success flash message
             $this->addFlash('success', 'Account have been sold!');
 

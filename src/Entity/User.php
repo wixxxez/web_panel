@@ -33,6 +33,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 255,options: ["default" => "/uploads/avatars/default.png"] )]
+    private ?string $profile_image = null;
+
+    #[ORM\Column(options: ["default" => 0]) ]
+    private ?float $balance = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,5 +112,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getProfileImage(): ?string
+    {
+        return $this->profile_image;
+    }
+
+    public function setProfileImage(string $profile_image): static
+    {
+        $this->profile_image = $profile_image;
+
+        return $this;
+    }
+
+    public function getBalance(): ?int
+    {
+        return $this->balance;
+    }
+    public function updateBalance(float $balance): static
+    {
+        $this->balance  = $this->balance + $balance;
+
+        return $this;
+    }
+ 
+    public function setBalance(float $balance): static
+    {
+        $this->balance = $balance;
+
+        return $this;
     }
 }
