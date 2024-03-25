@@ -90,13 +90,26 @@ class AccountRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->andWhere('a.status = :status')
             ->setParameter('status', 'Closed')
+            ->andWhere('a.admin_event != :event')
+            ->setParameter('event', 'Sold')
             ->orderBy('a.id', 'DESC')
             
             ->select('a')
             ->getQuery()
             ->getResult();
     }
+    public function findLastSoldAccounts( ) {
 
+        return $this->createQueryBuilder('a')
+             
+            ->andWhere('a.admin_event = :event')
+            ->setParameter('event', 'Sold')
+            ->orderBy('a.id', 'DESC')
+            
+            ->select('a')
+            ->getQuery()
+            ->getResult();
+    }
     public function findAwaitedAccountsForUser(int $id ) {
 
         return $this->createQueryBuilder('a')
@@ -343,4 +356,30 @@ public function GetGraphData($connection){
         return $results; 
     }
 
+
+    public function removeOldAccounts(): void
+    {
+        $entityManager = $this->getEntityManager();
+
+        // Calculate the date one month ago
+        $oneMonthAgo = new \DateTime();
+        $oneMonthAgo->modify('-1 month');
+
+        // Query accounts older than one month
+        $oldAccounts = $this->createQueryBuilder('a')
+            ->andWhere(' a.createdAt  < :oneMonthAgo')
+            ->setParameter('oneMonthAgo', $oneMonthAgo->format('Y-m-d'))
+            ->andWhere(' a.admin_event  = :event')
+            ->setParameter('event', 'Sold')
+            ->getQuery()
+            ->getResult();
+
+        // Remove the old accounts
+        foreach ($oldAccounts as $account) {
+            $entityManager->remove($account);
+        }
+        
+        // Flush changes to the database
+        $entityManager->flush();
+    }
 }

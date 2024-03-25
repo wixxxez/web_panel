@@ -51,6 +51,10 @@
                 <i class="fas fa-table mr-3"></i>
                 Statistics
             </a>
+             <a href="{{ path('app_archive') }}" class="{% if active_page == 'Archive' %}active-nav-link{% endif %} flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-archive mr-3"></i>
+                Archive
+            </a>
             {% endif %}
         </nav>
         <a href="{{ path('app_logout') }}" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
