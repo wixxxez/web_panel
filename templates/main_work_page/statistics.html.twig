@@ -67,8 +67,8 @@
         <tbody>
             {% for account in accounts %}
                                             <tr class="hover:bg-grey-lighter">
-                                                <td class="border px-4 py-2">{{ account.id }}</td>
-                                                <td class="border px-4 py-2">{{ account.workerID }}</td>
+                                                <td class="border px-4 py-2"> {{ account.id }}</td>
+                                                <td class="border px-4 py-2 hover:underline"> <a href = "{{ path('app_profile', {'id': account.workerID } ) }}"> {{ account.workerID }} </a> </td>
                                                 <td class="border px-4 py-2"> {{ account.sell }} </td>
                                                 <td class="border px-4 py-2"> {{ account.paid }} </td>
                                                 <td class="border px-4 py-2"> {{ account.event }} </td>
