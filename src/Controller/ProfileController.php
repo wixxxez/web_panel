@@ -87,6 +87,12 @@ class ProfileController extends AbstractController
 
        $user_data = $account_repo -> findAwaitedAccountsForUser($id); 
        $data = $account_repo->getAccountDetailsByDateAndWorkID($conn, date('Y-m-d'),$id );
+       $profileGraphData = $account_repo->getProfileWeekProgrees($conn , $id);
+       $totalPrices = [];
+        foreach ($profileGraphData as $result) {
+            $totalPrices[] = $result['amount_of_barcodes'];
+        }
+        
         return $this->render('main_work_page/profile.html.twig', [
             'controller_name' => 'ProfileController',
             'active_page' => "Account",
@@ -94,7 +100,8 @@ class ProfileController extends AbstractController
             'user'=>$user,
             'role' => $role,
             'accounts' => $user_data,
-            'statistics' => $data
+            'statistics' => $data,
+            'barcodes' => $totalPrices
         ]);
     }
 }

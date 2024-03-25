@@ -209,16 +209,14 @@ class AccountRepository extends ServiceEntityRepository
 public function getAccountDetailsByDateAndWorkID($connection, $date, $workerId)
     {
         $sql = '
-            SELECT 
-                u.username AS username,
-                a.day,
-                a.worker_id,
-                a.amount_of_barcodes,
-                a.total_price
+             SELECT 
+                
+                SUM(a.amount_of_barcodes) as amount_of_barcodes ,
+                SUM(a.total_price) as total_price
             FROM (
                 SELECT 
                     worker_id,
-                    created_at AS day,
+                    DATE(created_at) AS day,
                     COALESCE(SUM(CASE WHEN barcode1 IS NOT NULL THEN 1 ELSE 0 END), 0) 
                     + COALESCE(SUM(CASE WHEN barcode2 IS NOT NULL THEN 1 ELSE 0 END), 0) 
                     + COALESCE(SUM(CASE WHEN barcode3 IS NOT NULL THEN 1 ELSE 0 END), 0) 
@@ -228,17 +226,21 @@ public function getAccountDetailsByDateAndWorkID($connection, $date, $workerId)
                 FROM 
                     account
                 WHERE
-                    created_at = :date
-                     
+                    created_at >= DATE_SUB(CURRENT_DATE(), INTERVAL (DAYOFWEEK(CURRENT_DATE()) + 5) % 7 DAY) AND
+                    created_at < DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL (DAYOFWEEK(CURRENT_DATE()) + 5) % 7 DAY), INTERVAL 7 DAY) AND
+                    worker_id =  :worker_id
                 GROUP BY 
-                    worker_id
+                    worker_id, DATE(created_at)
             ) AS a
             JOIN user AS u ON u.id = a.worker_id
-            WHERE worker_id = :worker_id
+            WHERE 
+                a.worker_id = :worker_id
+            ORDER BY day ASC
+             
         ';
 
         $stmt = $connection->prepare($sql);
-        $stmt = $stmt->execute(['date' => $date,'worker_id' => $workerId, ]); 
+        $stmt = $stmt->execute([ 'worker_id' => $workerId, ]); 
         
         $results = $stmt->fetchAllAssociative();
 
@@ -298,4 +300,47 @@ public function GetGraphData($connection){
 
         return $results;
     }
+
+    public function getProfileWeekProgrees($connection, $workerId)
+    {
+        $sql = '
+                SELECT 
+                u.username AS username,
+                DATE(a.day) AS day,
+                a.worker_id,
+                a.amount_of_barcodes,
+                a.total_price
+            FROM (
+                SELECT 
+                    worker_id,
+                    DATE(created_at) AS day,
+                    COALESCE(SUM(CASE WHEN barcode1 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+                    + COALESCE(SUM(CASE WHEN barcode2 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+                    + COALESCE(SUM(CASE WHEN barcode3 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+                    + COALESCE(SUM(CASE WHEN barcode4 IS NOT NULL THEN 1 ELSE 0 END), 0) AS amount_of_barcodes,
+                    SUM(CASE WHEN barcode1 IS NOT NULL OR barcode2 IS NOT NULL THEN price ELSE 0 END)
+                    + SUM(CASE WHEN barcode3 IS NOT NULL OR barcode4 IS NOT NULL THEN price2 ELSE 0 END) AS total_price
+                FROM 
+                    account
+                WHERE
+                    created_at >= DATE_SUB(CURRENT_DATE(), INTERVAL (DAYOFWEEK(CURRENT_DATE()) + 5) % 7 DAY) AND
+                    created_at < DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL (DAYOFWEEK(CURRENT_DATE()) + 5) % 7 DAY), INTERVAL 7 DAY) AND
+                    worker_id =  :worker_id
+                GROUP BY 
+                    worker_id, DATE(created_at)
+            ) AS a
+            JOIN user AS u ON u.id = a.worker_id
+            WHERE 
+                a.worker_id = :worker_id
+            ORDER BY day ASC
+        ';
+
+        $stmt = $connection->prepare($sql);
+        $stmt = $stmt->execute([ 'worker_id' => $workerId, ]); 
+        
+        $results = $stmt->fetchAllAssociative();
+
+        return $results; 
+    }
+
 }
