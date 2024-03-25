@@ -50,7 +50,7 @@ security:
         - { path: ^/check_account_by_admin, roles: [ROLE_ADMIN, ROLE_MANAGER] }
         - { path: ^/check_account_by_admin_cancel, roles: [ROLE_ADMIN, ROLE_MANAGER] }
         - { path: ^/archive, roles: [ROLE_ADMIN, ROLE_MANAGER] }
-        - { path: ^/archive_delete, roles: [ROLE_ADMIN, ROLE_MANAGER] }
+        - { path: ^/archive_delete, roles: ROLE_ADMIN }
 when@test:
     security:
         password_hashers:
