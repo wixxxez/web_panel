@@ -137,7 +137,13 @@
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
      
-     
+      <script>
+    // JavaScript to toggle navigation panel visibility
+    document.getElementById("toggleNavButton").addEventListener("click", function() {
+        var sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("hidden");
+    });
+</script>
 </body>
 </html>
         {% endblock %}
