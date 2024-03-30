@@ -186,34 +186,35 @@ class AccountRepository extends ServiceEntityRepository
      public function getAccountDetailsByDate($connection, $date)
     {
         $sql = '
-            SELECT 
-                u.username AS username,
-                a.day,
-                a.worker_id,
-                a.amount_of_barcodes,
-                a.total_price
-            FROM (
-                SELECT 
-                    worker_id,
-                    created_at AS day,
-                    COALESCE(SUM(CASE WHEN barcode1 IS NOT NULL THEN 1 ELSE 0 END), 0) 
-                    + COALESCE(SUM(CASE WHEN barcode2 IS NOT NULL THEN 1 ELSE 0 END), 0) 
-                    + COALESCE(SUM(CASE WHEN barcode3 IS NOT NULL THEN 1 ELSE 0 END), 0) 
-                    + COALESCE(SUM(CASE WHEN barcode4 IS NOT NULL THEN 1 ELSE 0 END), 0) AS amount_of_barcodes,
-                    SUM(CASE WHEN barcode1 IS NOT NULL OR barcode2 IS NOT NULL THEN price ELSE 0 END)
-                    + SUM(CASE WHEN barcode3 IS NOT NULL OR barcode4 IS NOT NULL THEN price2 ELSE 0 END) AS total_price
-                FROM 
-                    account
-                WHERE
-                    created_at = :date
-                GROUP BY 
-                    worker_id
-            ) AS a
-            JOIN user AS u ON u.id = a.worker_id
+        SELECT 
+        u.username AS username,
+        
+        a.worker_id,
+        a.amount_of_barcodes,
+        a.total_price
+    FROM (
+        SELECT 
+            worker_id,
+             
+            COALESCE(SUM(CASE WHEN barcode1 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+            + COALESCE(SUM(CASE WHEN barcode2 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+            + COALESCE(SUM(CASE WHEN barcode3 IS NOT NULL THEN 1 ELSE 0 END), 0) 
+            + COALESCE(SUM(CASE WHEN barcode4 IS NOT NULL THEN 1 ELSE 0 END), 0) AS amount_of_barcodes,
+            SUM(CASE WHEN barcode1 IS NOT NULL OR barcode2 IS NOT NULL THEN price ELSE 0 END)
+            + SUM(CASE WHEN barcode3 IS NOT NULL OR barcode4 IS NOT NULL THEN price2 ELSE 0 END) AS total_price
+        FROM 
+            account
+            WHERE
+            created_at >= DATE_SUB(CURRENT_DATE(), INTERVAL (DAYOFWEEK(CURRENT_DATE()) + 5) % 7 DAY) AND
+            created_at < DATE_ADD(DATE_SUB(CURRENT_DATE(), INTERVAL (DAYOFWEEK(CURRENT_DATE()) + 5) % 7 DAY), INTERVAL 7 DAY) 
+            GROUP BY 
+                worker_id  
+        ) AS a
+        JOIN user AS u ON u.id = a.worker_id;
         ';
 
         $stmt = $connection->prepare($sql);
-        $stmt = $stmt->execute(['date' => $date]); 
+        $stmt = $stmt->execute( ); 
         $results = $stmt->fetchAllAssociative();
 
         return $results; 
@@ -270,17 +271,24 @@ public function GetGraphData($connection){
         $results = [];
 
         $sql = '
-            SELECT 
-                DATE(created_at) AS day,
-                SUM(price + price2) as total_price
-            FROM 
-                account
-            WHERE 
-                created_at >= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY)
-            GROUP BY 
-                DATE(created_at)
-            ORDER BY 
-                DATE(created_at) ASC;
+        SELECT 
+        day,
+        SUM(total_count) as total_price
+    FROM (
+        SELECT 
+            DATE(created_at) AS day,
+            (COUNT(barcode1) + COUNT(barcode2) + COUNT(barcode3) + COUNT(barcode4)) as total_count
+        FROM 
+            account
+        WHERE 
+            created_at >= DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY)
+        GROUP BY 
+            DATE(created_at)
+    ) AS subquery
+    GROUP BY 
+        day
+    ORDER BY 
+        day ASC;
         ';
         $stmt = $connection->prepare($sql);
         $stmt = $stmt->execute(); 

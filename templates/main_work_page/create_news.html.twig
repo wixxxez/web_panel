@@ -2,7 +2,11 @@
 
 {% block title %}Edit...{% endblock %}
 
-{% block head %} {{parent()}} {% endblock %}
+{% block head %}
+
+ {{parent()}}
+<link href="{{ asset('assets/css/text_editor.css') }}" rel='stylesheet'>
+ {% endblock %}
  
     {% block aside %}
     <body class="bg-gray-100 font-family-karla flex">
@@ -18,17 +22,39 @@
                             <i class="fas fa-list mr-3"></i> Edit {{ type }}
                         </p>
                         <div class="leading-loose">
-                            
-                                 {{ form_start(form, {'attr': {'class' : 'p-10 bg-white rounded shadow-xl' }}) }}
-                                  {{ form_widget(form.type, {'attr' : {'hidden':''}}) }}
+                             
                                 <div class="mt-2">
-                                     
-                                   {{ form_row(form.text) }}
-                                </div>
-                                <div class="mt-6">
-                                    <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Submit</button>
-                                </div>
-                </form>
+                                    <div class="cont">
+                                        <div id="editor" contenteditable="false" style="justify-content:space-between;">
+                                            <section id="toolbar">
+                                                <div id="bold" class="icon fa fa-bold"></div>
+                                                <div id="italic" class="icon fa fa-italic"></div>
+                                                <div id="createLink" class="icon fa fa-link"></div>
+                                                <div id="insertUnorderedList" class="icon fa fa-list"></div>
+                                                <div id="insertOrderedList" class="icon fa fa-list-ol"></div>
+                                                <div id="justifyLeft" class="icon fa fa-align-left"></div>
+                                                <div id="justifyRight" class="icon fa fa-align-right"></div>
+                                                <div id="justifyCenter" class="icon fa fa-align-center"></div>
+                                                <div id="justifyFull" class="icon fa fa-align-justify"></div>
+                                            </section>
+
+                                            <div id="page" contenteditable="true">
+                                                <p id="page-content"></p>
+                                            </div>
+                                        </div>
+                                        <button class="log-out-client" onclick="getContent();">
+                                            <i class="fa fa-save"></i>
+                                            <span>Save content</span>
+                                        </button>
+                                    </div>
+                                </div>  
+                                 
+                                 
+                                 {{ form_start(form, {'attr': {'class' : ' ' , 'id' :'myForm' }}) }}
+                                  {{ form_widget(form.type, {'attr' : {'hidden':''}}) }}
+                                    {{ form_widget(form.text, {'attr' : {'hidden' :'',  }}) }}
+                               
+                                    {{ form_end(form)}}
             </div>
         </div>
         </main>
@@ -40,8 +66,9 @@
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
     <!-- ChartJS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
-
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/js/text_editor.js') }}"> </script>
  
    
 {% endblock %}

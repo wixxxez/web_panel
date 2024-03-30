@@ -1,7 +1,8 @@
  {% extends "main_work_page/navigation_panel.html.twig" %}
  {% block title %}Web panel{% endblock %}
 
-{% block head %} {{parent()}} {% endblock %}
+{% block head %} {{parent()}} 
+<link href="{{ asset('assets/css/text_editor.css') }}" rel='stylesheet'> {% endblock %}
  
     {% block aside %}
     <body class="bg-gray-100 font-family-karla flex">
@@ -30,7 +31,7 @@
                     </div>
                     <div class="w-full lg:w-1/2 pl-0 lg:pl-2 mt-12 lg:mt-0" x-data="{ openTab: 1 }">
                         <div>
-                            <ul class="flex border-b">
+                            <ul class="flex border-b" style = "list-style:none;">
                                 <li class="-mb-px mr-1" @click="openTab = 1">
                                     <a :class="openTab === 1 ? 'border-l border-t border-r rounded-t text-blue-700 font-semibold' : 'text-blue-500 hover:text-blue-800'" class="bg-white inline-block py-2 px-4 font-semibold" href="#">Admin Message</a>
                                 </li>
@@ -41,7 +42,7 @@
                         </div>
                         <div class="bg-white p-6">
                             <div id="" class="" x-show="openTab === 1">
-                               {{ news.admin.Text }}
+                               {{ news.admin.Text | raw }}
                              
                             {% if 'ROLE_ADMIN' in app.user.roles  %}
                             <a href=" {{ path('app_create_news', {'type': 'Admin Message'}) }} ">
@@ -51,7 +52,7 @@
                             {% endif %}
                             </div>
                             <div id="" class="" x-show="openTab === 2">
-                                 {{ news.events.Text }}
+                                 {{ news.events.Text | raw }}
                                  {% if 'ROLE_ADMIN' in app.user.roles  %}
                                  <a href=" {{ path('app_create_news', {'type': 'Events'}) }} ">
                                 <button class="w-1/2 bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
@@ -115,7 +116,7 @@
             data: {
                 labels: ['Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sut.', 'Sun.'],
                 datasets: [{
-                    label: 'Total sales',
+                    label: 'Amount of barcodes',
                     data: {{ graph | json_encode | raw }},
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
