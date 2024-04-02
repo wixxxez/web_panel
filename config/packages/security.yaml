@@ -47,6 +47,7 @@ security:
         - { path: ^/create_account, roles: ROLE_ADMIN }
         - { path: ^/create_news, roles: ROLE_ADMIN }
         - { path: ^/statistics, roles: [ROLE_ADMIN, ROLE_MANAGER] }
+        - { path: ^/accounts, roles:  [ROLE_ADMIN, ROLE_USER, ROLE_MANAGER] }
         - { path: ^/check_account_by_admin, roles: [ROLE_ADMIN, ROLE_MANAGER] }
         - { path: ^/check_account_by_admin_cancel, roles: [ROLE_ADMIN, ROLE_MANAGER] }
         - { path: ^/archive, roles: [ROLE_ADMIN, ROLE_MANAGER] }

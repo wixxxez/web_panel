@@ -1,7 +1,30 @@
  {% extends "main_work_page/navigation_panel.html.twig" %}
  {% block title %}Web panel{% endblock %}
 
-{% block head %} {{parent()}} {% endblock %}
+{% block head %} {{parent()}}
+<style> 
+#example .barcode {
+   
+   max-width: 50px;
+    
+    
+   overflow:hidden;
+    white-space: nowrap;
+   overflow-x: visible; 
+ 
+}
+ .rem89 {
+    width:89rem; 
+ }
+#example th {
+   
+   width: auto;
+    
+     
+}
+</style> 
+
+ {% endblock %}
  
     {% block aside %}
     <body class="bg-gray-100 font-family-karla flex">
@@ -80,12 +103,12 @@
                                                 
                                                 <td class="border px-4 py-2"> {{ account.date }} </td>
                                                 <td class="border px-4 py-2"> {{ account.price }} </td>
-                                                <td class="border px-4 py-2"> {{ account.barcode1 }} </td>
-                                                <td class="border px-4 py-2"> {{ account.barcode2 }} </td>
+                                                   <td class="border px-4 py-2 barcode"  > {{ account.barcode1 }} </td>
+                                                <td class="border px-4 py-2 barcode"> {{ account.barcode2 }} </td>
                                                 <td class="border px-4 py-2"> {{ account.seats2 }} </td>
                                                 <td class="border px-4 py-2"> {{ account.price2 }} </td>
-                                                <td class="border px-4 py-2"> {{ account.barcode3 }} </td>
-                                                <td class="border px-4 py-2"> {{ account.barcode4 }} </td>
+                                                <td class="border px-4 py-2 barcode"> {{ account.barcode3 }} </td>
+                                                <td class="border px-4 py-2 barcode"> {{ account.barcode4 }} </td>
                                                 {% if account.adminEvent == "Await" %}
                                                 <td class="border px-4 py-2">
                                                     <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">
@@ -123,10 +146,20 @@
 <script>
     $(document).ready(function() {
         $('#example').DataTable({
-            scrollX: true
-            // Add any customization options here
+             
+            "autoWidth": false,
+            "scrollX": true,
         });
     });
+    function helllko () {
+        $('#example').DataTable()
+            .rows().invalidate('data')
+            .draw(false);
+
+    }
+    $.fn.dataTable.ext.errMode = 'none';
+
+    window.draw = helllko();
 </script>
                </main>
     

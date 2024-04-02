@@ -150,6 +150,13 @@
         var toggleIcon = document.getElementById("toggleIcon");
         toggleIcon.classList.toggle("fa-arrow-left");
         toggleIcon.classList.toggle("fa-arrow-right");
+         
+             
+         try { window.draw(); }
+             
+        catch(error) {
+            //
+        }
     });
 </script>
     {% endblock %}
