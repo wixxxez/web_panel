@@ -1,0 +1,115 @@
+ {% extends "main_work_page/navigation_panel.html.twig" %}
+ {% block title %}Web panel{% endblock %}
+
+{% block head %} {{parent()}} {% endblock %}
+ 
+    {% block aside %}
+    <body class="bg-gray-100 font-family-karla flex">
+        {{ parent() }}
+    <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    
+    {% endblock %}
+    
+        {% block header %}
+            {{ parent() }}
+            
+            <main class="w-full flex-grow p-6">
+            {% for flash_type, messages in app.flashes %}
+                                    {% for message in messages %}
+                                    
+                                        {% if flash_type =='error' %}
+                                            <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                                    </svg>
+                                                    <span class="sr-only">Info</span>
+                                                    <div>
+                                                        <span class="font-medium">&nbsp;&nbsp;Error.&nbsp;</span> {{ message }}
+                                                    </div>
+                                                    </div>
+                                        {% else %}
+                                          <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                        </svg>
+                                        <span class="sr-only">Info</span>
+                                        <div>
+                                            <span class="font-medium">Success!</span> {{ message }}
+                                        </div>
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %} 
+        <div class="w-full overflow-x-hidden border-t flex flex-col">
+               
+            <div class="w-1/4">
+                    {% if 'ROLE_ADMIN' in app.user.roles  %}
+            <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <a href="{{ path('app_account_create') }}"><i class="fas fa-plus mr-3"></i> Add account </a>
+            </button>
+            {% endif %} 
+                    </div>
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-dark">
+    <h2 class="text-2xl font-bold mb-4">Available Accounts</h2>
+    <table id="example" class="table-auto w-full bg-dark">
+        <thead>
+            <tr>
+                <th class="px-4 py-2" data-priority="1">Login</th>
+                <th class="px-4 py-2" data-priority="2">Password</th>
+                <th class="px-4 py-2"data-priority="3">State</th>
+                <th class="px-4 py-2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for account in accounts %}
+                                            <tr class="hover:bg-grey-lighter">
+                                                <td class="border px-4 py-2">{{ account.login }}</td>
+                                                <td class="border px-4 py-2">{{ account.password }}</td>
+                                                <td class="border px-4 py-2">{{ account.state }}</td>
+                                                <td class="border px-4 py-2">
+                                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                                        <a href="{{ path('app_logged_account',{'id': account.id }) }}"> <i class="fas fa-sign-in-alt mr-3"></i> Get Account ! </a>
+                                                    </button>
+                                                </td>
+                                            </tr>
+            {% endfor %}
+             
+
+
+         
+        </tbody>
+    </table>
+</div>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            // Add any customization options here
+        });
+    });
+</script>
+               
+    
+           </main> <footer class="w-full bg-white text-right p-4">
+                By ANCIENT STUDIO
+            </footer>
+        </div>
+        
+    </div>
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+     
+     
+</body>
+</html>
+        {% endblock %}
+         
+
+     
+
+ 

@@ -1,0 +1,7 @@
+{# templates/form/custom_form_field.html.twig #}
+{% block custom_form_widget %}
+    {% if label is not empty %}
+        <label for="{{ id }}">{{ label }}</label>
+    {% endif %}
+    {{ form_widget(form) }}
+{% endblock %}

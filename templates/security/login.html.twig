@@ -1,0 +1,70 @@
+
+
+<head>
+{% block title %} {% endblock %}
+<link  href="{{ asset('assets/css/login.css')}}" rel="stylesheet" >
+<link  href="{{ asset('assets/css/style.css')}}" rel="stylesheet" >
+ 
+</head>
+
+{% block body %}
+<span id = "intro"> _ // Connecting to service... Fault. </span><br>
+<span id = "intro"> _ // System detected unauthenticated user... </span>
+<form class="form" method = "post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+  <div class="control">
+    <h1>Sign In</h1>
+  </div>
+  
+  <div class="control block-cube block-input">
+    <input type="text" value="{{ last_username }}" placeholder="username" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+    <div class="bg-top">
+      <div class="bg-inner"></div>
+    </div>
+    <div class="bg-right">
+      <div class="bg-inner"></div>
+    </div>
+    <div class="bg">
+      <div class="bg-inner"></div>
+    </div>
+  </div>
+
+  <div class="control block-cube block-input">
+   <input type="password" placeholder ="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+<div class="bg-top">
+      <div class="bg-inner"></div>
+    </div>
+    <div class="bg-right">
+      <div class="bg-inner"></div>
+    </div>
+    <div class="bg">
+      <div class="bg-inner"></div>
+    </div>
+    
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+    
+     
+  </div>
+  
+
+     
+  <button   class="btn-glitch-fill" type="submit">
+    
+    <span class="text">// Login</span><span class="text-decoration">_</span><span class="decoration">&rArr;</span>
+  </button>
+   <div class="checkbox mb-3">
+        
+            <input type="checkbox" name="_remember_me"> Remember me
+       
+     
+    </div>
+
+</form>
+
+ 
+{% endblock %}

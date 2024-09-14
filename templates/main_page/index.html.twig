@@ -1,11 +1,23 @@
-{# templates/default/index.html.twig #}
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Symfony Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet">
 </head>
 <body>
-    <h1>Welcome to My Symfony Website</h1>
+  <span id="intro">_ // Initialize system components ...</span>
+    <br>
+    <span id="intro">_ // All resources are loaded. Service is ready to work</span>
+    <div class="center-center">
+    <a class="btn-glitch-fill" href="{{ path('app_login') }}">
+        <span class="text">// Sign in</span><span class="text-decoration">_</span><span class="decoration">&rArr;</span>
+    </a>
+    </div>
 </body>
 </html>
+
+ 
+ 
+ 
